@@ -1,0 +1,56 @@
+name: Build Blackcomb OS
+
+# This tells GitHub to run the build every time you push code, 
+# and also gives you a manual "Run Workflow" button in the UI.
+on:
+  push:
+    branches: [ main, master ]
+  workflow_dispatch:
+
+jobs:
+  # PHASE 1: Build the OS and push it to your GitHub account
+  build-image:
+    name: Build and Push Image
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Build Image
+        uses: blue-build/github-action@v1.8
+        with:
+          recipe: recipe.yml
+          cosign_private_key: ""
+          registry_token: ${{ github.token }}
+          pr_event_number: ${{ github.event.number }}
+
+  # PHASE 2: Download the built OS and pack it into a bootable ISO
+  build-iso:
+    name: Generate Bootable ISO
+    needs: build-image
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: read
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Build ISO
+        uses: jasonn3/build-container-installer@v1.2.2
+        with:
+          arch: x86_64
+          image_name: blackcomb
+          # Dynamically pulls the image from your personal GitHub Container Registry
+          image_repo: ghcr.io/${{ github.repository_owner }}
+          image_tag: latest
+          version: 43 # Matches the Fedora Kinoite version from your build logs
+          iso_name: blackcomb.iso
+          
+      - name: Upload ISO as Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: blackcomb-iso
+          path: ./*.iso
