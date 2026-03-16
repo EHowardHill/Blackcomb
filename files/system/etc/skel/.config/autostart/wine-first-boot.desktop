@@ -1,0 +1,12 @@
+[Desktop Entry]
+Type=Application
+Name=Windows Environment Initialization
+Comment=Builds the user's Wine prefix and links portable Windows applications on first login.
+# Executes the bash script we will place in the user's local bin folder
+Exec=/bin/bash -c "$HOME/.local/bin/first-logon-setup.sh"
+Icon=wine
+Terminal=false
+# Hides this script from the Start Menu so the user can't manually click it
+NoDisplay=true
+# Ensures it runs during the standard KDE startup sequence
+X-KDE-autostart-phase=2

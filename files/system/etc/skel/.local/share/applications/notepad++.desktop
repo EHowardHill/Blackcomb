@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Notepad++
+Comment=Windows Text Editor
+# We call our translator script, hand it the .exe path, and pass the file (%F)
+Exec=wine-run "C:\\Program Files\\Notepad++\\Notepad++.exe" %F
+Icon=accessories-text-editor
+Type=Application
+Terminal=false
+Categories=Utility;TextEditor;
+MimeType=text/plain;

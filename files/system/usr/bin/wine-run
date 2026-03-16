@@ -1,0 +1,18 @@
+#!/bin/bash
+
+export WINEPREFIX="$HOME/.wine"
+export WINEDEBUG=-all
+
+# The first argument is the Windows executable path (e.g., C:\Program Files\Notepad++\Notepad++.exe)
+EXE_PATH="$1"
+shift # Remove the executable from the argument list so we are left with just the file path
+
+# Check if the user double-clicked a file
+if [ $# -gt 0 ]; then
+    # Translate the Linux path (/home/user/file.txt) to a Windows path (Z:\home\user\file.txt)
+    WINDOWS_PATH=$(winepath -w "$1")
+    wine "$EXE_PATH" "$WINDOWS_PATH"
+else
+    # The user just opened the app from the Start Menu (no file attached)
+    wine "$EXE_PATH"
+fi

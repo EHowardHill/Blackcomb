@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Windows Explorer
+Comment=Windows File Manager
+Exec=wine-run "C:\\Program Files\\Explorer++\\Explorer++.exe" %F
+Icon=system-file-manager
+Type=Application
+Terminal=false
+Categories=System;FileManager;
+MimeType=inode/directory;

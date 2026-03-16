@@ -1,0 +1,17 @@
+[Default Applications]
+# Text files
+text/plain=notepad++.desktop
+text/markdown=notepad++.desktop
+
+# Folders and Directories
+inode/directory=explorer++.desktop
+
+# Media
+video/mp4=mpc-hc.desktop
+video/x-matroska=mpc-hc.desktop
+audio/mpeg=mpc-hc.desktop
+
+# Archives
+application/zip=7zip.desktop
+application/x-7z-compressed=7zip.desktop
+application/x-rar=7zip.desktop

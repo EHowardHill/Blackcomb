@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Media Player Classic
+Comment=Windows Media Player
+Exec=wine-run "C:\\Program Files\\MPC-HC\\mpc-hc64.exe" %F
+Icon=multimedia-video-player
+Type=Application
+Terminal=false
+Categories=AudioVideo;Video;Player;
+MimeType=video/mp4;video/x-matroska;audio/mpeg;

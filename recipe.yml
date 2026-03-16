@@ -1,0 +1,27 @@
+name: blackcomb
+description: A Wayland-based immutable OS that relies on Wine binaries for user space.
+base-image: ghcr.io/ublue-os/kinoite-main
+image-version: latest
+
+modules:
+  # 1. CORE SYSTEM MODIFICATIONS
+  - type: rpm-ostree
+    install:
+      # 'wine' automatically pulls in core and audio drivers
+      - wine
+      - winetricks
+      - cabextract
+      - samba
+      - xorg-x11-server-Xwayland
+
+  # 2. FILE INJECTION
+  - type: files
+    files:
+      - source: system
+        destination: /
+
+  # 3. SYSTEMD SERVICES
+  - type: systemd
+    system:
+      enabled:
+        - sddm.service
